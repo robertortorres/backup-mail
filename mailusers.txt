@@ -1,0 +1,2 @@
+usuario1@dominio.com;senha1;usuario1@backup.local;senhaLocal1
+usuario2@dominio.com;senha2;usuario2@backup.local;senhaLocal2

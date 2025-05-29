@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  mailserver:
+    image: tvial/docker-mailserver:latest
+    container_name: mail-backup-server
+    hostname: mailbackup
+    domainname: local
+    environment:
+      - ENABLE_IMAP=1
+    volumes:
+      - /dados/mail:/var/mail
+      - ./config/:/tmp/docker-mailserver/
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
+  mailpile:
+    image: mailpile/mailpile
+    container_name: mailpile
+    ports:
+      - "33411:33411"
+    volumes:
+      - mailpile_data:/root/.local/share/Mailpile
+      - /dados/mail:/mail
+    restart: unless-stopped
+
+volumes:
+  mailpile_data:
